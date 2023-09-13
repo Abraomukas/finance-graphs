@@ -4,21 +4,19 @@ from bs4 import BeautifulSoup
 
 def extract_values_from_url(url):
     try:
-        # Send an HTTP GET request to the URL
         response = requests.get(url)
 
-        # Check if the request was successful (status code 200)
         if response.status_code == 200:
             # Parse the HTML content of the page
             soup = BeautifulSoup(response.text, "html.parser")
 
-            # Find and extract the values you are interested in
-            # For example, let's say you want to extract all the text within <p> tags
-            values = []
-            for paragraph in soup.find_all("p"):
-                values.append(paragraph.text)
+            # Find the specific <div> element by its class
+            stock_prize_div = soup.find('div', class_="kf1m0")
 
-            return values
+            if stock_prize_div:
+                return stock_prize_div.text.strip()
+            else:
+                print(f"Div with class 'kf1m0' not found on the page.")
         else:
             print(
                 f"Failed to retrieve content from {url}. Status code: {response.status_code}"
@@ -28,10 +26,9 @@ def extract_values_from_url(url):
 
 
 if __name__ == "__main__":
-    url = input("Enter the URL: ")
-    extracted_values = extract_values_from_url(url)
+    # url = input("Enter the URL: ")
 
-    if extracted_values:
-        print("Extracted values:")
-        for value in extracted_values:
-            print(value)
+    url = "https://www.google.com/finance/quote/ACN:NYSE?hl=en"
+    extracted_elements = extract_values_from_url(url)
+
+    print("Stock value - " + extracted_elements)
