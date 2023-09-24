@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import matplotlib.pyplot as plt
 
 
 def extract_values_from_url(url):
@@ -11,7 +12,7 @@ def extract_values_from_url(url):
             soup = BeautifulSoup(response.text, "html.parser")
 
             # Find the specific <div> element by its class
-            stock_prize_div = soup.find('div', class_="kf1m0")
+            stock_prize_div = soup.find("div", class_="kf1m0")
 
             if stock_prize_div:
                 return stock_prize_div.text.strip()
@@ -32,3 +33,18 @@ if __name__ == "__main__":
     extracted_elements = extract_values_from_url(url)
 
     print("Stock value - " + extracted_elements)
+
+    x = [1, 2, 3]
+    y = [2, 4, 1]
+
+    plt.plot(x, y)
+    
+    plt.xlabel("x - axis")
+
+    plt.ylabel("y - axis")
+
+
+    plt.title("My first graph!")
+
+
+    plt.show()
