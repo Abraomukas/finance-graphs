@@ -34,17 +34,17 @@ if __name__ == "__main__":
 
     print("Stock value - " + extracted_elements)
 
-    x = [1, 2, 3]
-    y = [2, 4, 1]
+    x = ["10am", "12pm", "2pm", "4pm"]
+    y = [float(extracted_elements.replace("$",""))-10.0, float(extracted_elements.replace("$",""))-5.0, float(extracted_elements.replace("$","")),float(extracted_elements.replace("$",""))+5.0]
 
     plt.plot(x, y)
     
-    plt.xlabel("x - axis")
+    plt.xlabel("TIME")
 
-    plt.ylabel("y - axis")
+    plt.ylabel("VALUE")
 
 
-    plt.title("My first graph!")
+    plt.title("Accenture's stock")
 
 
     plt.show()
