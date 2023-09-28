@@ -36,6 +36,30 @@ def extract_values_from_url():
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def extract_values_from_txt():
+    timestamps = []
+    values = []
+
+    with open('output.txt', 'r') as file:
+        for entry in file:
+            value = entry.strip()
+
+            value = value.split(" <> ")
+
+            timestamps.append(format_timestamp(value[0]))
+            values.append(value[1])
+
+    return timestamps, values
+
+def format_timestamp(timestamp):
+    parts = timestamp.split(" ")
+
+    time = parts[0].split(":")
+
+    if time[0][0] == "0":
+        return str(time[0][1]) + parts[1].lower()
+
+    return str(time[0]) + parts[1].lower()
 
 def populate_values():
     with open("output.txt", "a") as file:
@@ -49,28 +73,19 @@ def populate_values():
 
         print("Entry added!")
 
-
 if __name__ == "__main__":
-    # time, value = extract_values_from_url()
-
-    # print("Timestamp - " + time)
-    # print("Stock value - " + value)
-
-    # timeAxis = ["10am", "12pm", "2pm", "4pm"]
-    # valueAxis = np.array([3, 8, float(value.replace("$", "")), 10])
-
-    # plt.plot(timeAxis, valueAxis, marker="o", linestyle="dashed")
-
-    # plt.xlabel("TIME")
-    # plt.ylabel("VALUE")
-    # plt.title("Accenture's stock")
-
-    # plt.show()
-
-    ###
-
     while True:
+        timestamps, values = extract_values_from_txt()
+
+        plt.plot(timestamps, values, marker="o", linestyle="dashed")
+
+        plt.xlabel("TIME")
+        plt.ylabel("VALUE")
+        plt.title("Accenture's stock")
+
+        plt.show()
+
         populate_values()
 
-        time.sleep(60)
+        time.sleep(60 * 30)
 
