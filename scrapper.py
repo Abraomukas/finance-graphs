@@ -83,9 +83,14 @@ if __name__ == "__main__":
         plt.ylabel("VALUE")
         plt.title("Accenture's stock")
 
-        plt.show()
-
         populate_values()
 
-        time.sleep(60 * 30)
+        plt.show()
 
+        # The graph will be shown for 60 seconds
+        time.sleep(60)
+
+        plt.close()
+
+        # Wait for 1800 seconds before showing the graph again
+        time.sleep(60 * 30)
