@@ -67,7 +67,7 @@ def populate_values():
 
         input_date = datetime.strptime(time, "%b %d, %I:%M:%S %p UTC")
 
-        timestamp = input_date.strftime("%I:%M %p")
+        timestamp = input_date.strftime("%b %d, %I:%M %p")
 
         file.write(timestamp + " <> " + value.replace("$", "") + "\n")
 
