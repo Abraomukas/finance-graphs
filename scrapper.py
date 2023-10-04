@@ -77,6 +77,8 @@ if __name__ == "__main__":
     while True:
         timestamps, values = extract_values_from_txt()
 
+        # Read historical entries from XSL file
+
         plt.plot(timestamps, values, marker="o", linestyle="dashed")
 
         plt.xlabel("TIME")
